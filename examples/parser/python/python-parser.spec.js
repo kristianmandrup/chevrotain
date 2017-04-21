@@ -1,28 +1,5 @@
-import { parser } from './python-parser'
-import {
-    PythonParser
-} from '../../../'
-
+import { PythonParser, parserRule } from './python-parser'
 let expect = require("chai").expect
-
-// reuse the same parser instance.
-var parser = new MultiStartParser([]);
-
-function parseStartingWithRule(ruleName) {
-    return function(text) {
-        var lexResult = PythonLexer.tokenize(text);
-        // setting a new input will RESET the parser instance's state.
-        parser.input = lexResult.tokens
-        // just invoke which ever rule you want as the start rule. its all just plain javascript...
-        var value = parser[ruleName]()
-
-        return {
-            value:       value, // this is a pure grammar, the value will always be <undefined>
-            lexErrors:   lexResult.errors,
-            parseErrors: parser.errors
-        };
-    }
-}
 
 describe('The Chevrotain Lexer ability to parse python like indentation.', () => {
 
@@ -42,10 +19,26 @@ bx
 end
 `
 
+    it('a Parser class and instance is defined', () => {
+        expect(PythonParser).to.be.a(Parser)
+    })
+
+    it('a Parser instance is defined', () => {
+        expect(parser).to.exist
+        expect(parser).to.be.instanceof(PythonParser)
+    })
+
     it('Can Parse a simple python style if-else ', () => {
-        let ifElseRule = parseStartingWithRule('ifElse')
-        let result = ifElseRule()
+        let ifElseRule = parserRule('ifElse')
+        let result = ifElseRule(goodCode)
 
         expect(parser).to.be.instanceof(Parser)
     })
+
+    it('Cannot Parse a badly indented python style if-else ', () => {
+        let ifElseRule = parserRule('ifElse')
+        let result = ifElseRule(badCode)
+
+        expect(parser).to.be.instanceof(Parser)
+    })    
 })

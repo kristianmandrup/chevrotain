@@ -11,6 +11,24 @@ import {
     Parser 
 } from 'chevrotain'
 
+// reuse the same parser instance.
+const parser = new PythonParser([]);
+
+export function parserRule(ruleName) {
+    return function(text) {
+        var lexResult = PythonLexer.tokenize(text);
+        // setting a new input will RESET the parser instance's state.
+        parser.input = lexResult.tokens
+        // just invoke which ever rule you want as the start rule. its all just plain javascript...
+        var value = parser[ruleName]()
+
+        return {
+            value:       value, // this is a pure grammar, the value will always be <undefined>
+            lexErrors:   lexResult.errors,
+            parseErrors: parser.errors
+        };
+    }
+}
 export class PytonParser extends Parser {
 
     constructor(input) {
