@@ -44,6 +44,7 @@
     "url": "git://github.com/SAP/chevrotain.git"
   },
   "scripts": {
+    "build:examples": "babel examples --out-dir=play/examples",
     "release_patch": "git fetch && git rebase && node scripts/pre_release_build.js patch && grunt build && node scripts/post_release_build.js patch && node ../chevrotain_docs/scripts/upload_docs.js",
     "release_minor": "git fetch && git rebase && node scripts/pre_release_build.js minor && grunt build && node scripts/post_release_build.js minor && node ../chevrotain_docs/scripts/upload_docs.js",
     "unit_tests": "node_modules/.bin/_mocha ./lib/test/**/*spec.js",
@@ -52,10 +53,13 @@
     "compile_definitions_namespace": "tsc test_integration/definitions/namespaces.ts --module none --outDir dev/garbage",
     "lint": "tslint --project tsconfig.json"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.40",
+    "babel-core": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-runtime": "^6.23.0",
     "chai": "^3.5.0",
     "coveralls": "^2.12.0",
     "gitty": "^3.6.0",
@@ -93,6 +97,12 @@
     "webpack-dev-server": "^2.4.2",
     "wrench": "^1.5.9",
     "xregexp": "^3.1.1"
+  },
+  "babel": {
+    "presets": ["stage-2"],
+    "plugins": [
+      "transform-runtime"
+    ]
   },
   "typings": "lib/chevrotain.d.ts"
 }

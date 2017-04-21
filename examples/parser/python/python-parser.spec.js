@@ -1,4 +1,4 @@
-import { PythonParser, parserRule } from './python-parser'
+const { PythonParser, parserRule } = require('./python-parser')
 let expect = require("chai").expect
 
 describe('The Chevrotain Lexer ability to parse python like indentation.', () => {

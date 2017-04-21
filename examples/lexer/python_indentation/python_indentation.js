@@ -14,7 +14,7 @@
  */
 
 "use strict"
-const chevrotain = require("chevrotain")
+const chevrotain = require("../../../")
 const createToken = chevrotain.createToken
 const createTokenInstance = chevrotain.createTokenInstance
 const Lexer = chevrotain.Lexer

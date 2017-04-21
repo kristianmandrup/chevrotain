@@ -4,6 +4,7 @@
 
 /dev
 /lib
+/play
 
 /.tscache
 .baseDir.ts

@@ -11,3 +11,7 @@
 
 These examples are used as integration tests and are tested on each and every commit/pull request.
 Therefore they are **guaranteed** to be up to date and valid.
+
+## Indentation based (Python like) Parser
+
+`$ node examples/parser/python/python-parser.spec.js`
