@@ -141,11 +141,14 @@ let matchOutdent = _.partialRight(matchIndentBase, "outdent")
 
 let If = createToken({name: "If", pattern: /if/})
 let Else = createToken({name: "Else", pattern: /else/})
+let Then = createToken({name: "Then", pattern: /then/})
+let End = createToken({name: "End", pattern: /end/})
 let Print = createToken({name: "Print", pattern: /print/})
 let IntegerLiteral = createToken({name: "IntegerLiteral", pattern: /\d+/})
 let Colon = createToken({name: "Colon", pattern: /:/})
 let LParen = createToken({name: "LParen", pattern: /\(/})
 let RParen = createToken({name: "RParen", pattern: /\)/})
+let Var = createToken({name: "Var", pattern: /[a-z]+/})
 let Spaces = createToken({name: "Spaces", pattern: / +/, group: Lexer.SKIPPED})
 
 // newlines are not skipped, by setting their group to "nl" they are saved in the lexer result
@@ -183,6 +186,7 @@ module.exports = {
     Spaces:         Spaces,
     If:             If,
     Else:           Else,
+    End:            End,
     Print:          Print,
     IntegerLiteral: IntegerLiteral,
     Colon:          Colon,
